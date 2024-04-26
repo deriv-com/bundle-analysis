@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: Runner_16cores_Deriv-app
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
