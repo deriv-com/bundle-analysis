@@ -23,13 +23,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./deriv-app
+      # - name: Install Dependencies
+      #   run: npm install
+      #   working-directory: ./deriv-app
 
-      - name: Run Bootstrap
-        run: npm run bootstrap
-        working-directory: ./deriv-app
+      # - name: Run Bootstrap
+      #   run: npm run bootstrap
+      #   working-directory: ./deriv-app
 
       # - name: Build All Packages
       #   env:
@@ -38,9 +38,9 @@ jobs:
       #   shell: bash
       #   working-directory: ./deriv-app
 
-      - name: Analyze Build
-        run: npm run analyze
-        working-directory: ./deriv-app
+      # - name: Analyze Build
+      #   run: npm run analyze
+      #   working-directory: ./deriv-app
 
       - name: Run Compile Script
         run: node compile.js
