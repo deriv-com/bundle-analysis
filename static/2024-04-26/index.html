@@ -99,7 +99,7 @@
             <iframe
                 id="frame"
                 title="bundle-view"
-                src="./packages/2024-04-26/core/analyzed.html"
+                src="./packages/core/analyzed.html"
                 style="width: 100%; border: none"
             ></iframe>
         </div>
@@ -110,7 +110,7 @@
         ></script>
         <script>
             async function updateIframe(packageName) {
-                const iframeSrc = './packages/2024-04-26/' + packageName + '/analyzed.html';
+                const iframeSrc = './packages/' + packageName + '/analyzed.html';
                 document.getElementById('frame').src = iframeSrc;
                 document.getElementById('navbarDropdownMenuLink').textContent =
                     packageName.charAt(0).toUpperCase() + packageName.slice(1);
@@ -118,7 +118,7 @@
             }
 
             async function updateBundleSize(packageName) {
-                const response = await fetch(`./packages/2024-04-26/${packageName}/report.json`);
+                const response = await fetch(`./packages/${packageName}/report.json`);
                 if (!response.ok) {
                     document.getElementById('bundleSize').textContent = 'Bundle Size: Error loading data';
                     return;
