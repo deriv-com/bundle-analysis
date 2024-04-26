@@ -3,9 +3,10 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: Runner_16cores_Deriv-app
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -30,12 +31,12 @@ jobs:
         run: npm run bootstrap
         working-directory: ./deriv-app
 
-      - name: Build All Packages
-        env:
-          NODE_ENV: production
-        run: npm run build:all
-        shell: bash
-        working-directory: ./deriv-app
+      # - name: Build All Packages
+      #   env:
+      #     NODE_ENV: production
+      #   run: npm run build:all
+      #   shell: bash
+      #   working-directory: ./deriv-app
 
       - name: Analyze Build
         run: npm run analyze
@@ -54,8 +55,18 @@ jobs:
         run: |
           mkdir -p dist/2024-04-25
           cp -r dist/* dist/2024-04-25/
-          git checkout gh-pages
-          git add dist/2024-04-25
-          git commit -m 'Deploy to gh-pages'
-          git push origin gh-pages
-        working-directory: ${{ github.workspace }}
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.6.0
+        with:
+          branch: gh-pages
+          folder: dist/2024-04-25
+          target-folder: daily/2024-04-25
+          clean: false
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.6.0
+        with:
+          branch: gh-pages
+          folder: static
+          clean: false
