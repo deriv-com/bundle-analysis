@@ -54,18 +54,16 @@ jobs:
           git config user.name 'github-actions'
           git config user.email 'github-actions@github.com'
 
-      - name: Commit and Push Changes
-        run: |
-          mkdir -p dist/2024-04-25
-          cp -r dist/* dist/2024-04-25/
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
-          folder: dist/2024-04-25
-          target-folder: daily/2024-04-25
+          folder: static
           clean: false
+
+      - name: Commit and Push Changes
+        run: |
+          mv dist static/2024-04-25
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.6.0
@@ -73,3 +71,4 @@ jobs:
           branch: gh-pages
           folder: static
           clean: false
+
