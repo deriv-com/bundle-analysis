@@ -19,9 +19,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
-        run: npm install
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
