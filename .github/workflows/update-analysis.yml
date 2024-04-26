@@ -1,0 +1,58 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Clone deriv-app Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'binary-com/deriv-app'
+          path: 'deriv-app'
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./deriv-app
+
+      - name: Run Bootstrap
+        run: npm run bootstrap
+        working-directory: ./deriv-app
+
+      - name: Build All Packages
+        run: npm run build:all
+        working-directory: ./deriv-app
+
+      - name: Analyze Build
+        run: npm run analyze
+        working-directory: ./deriv-app
+
+      - name: Run Compile Script
+        run: node compile.js
+        working-directory: ${{ github.workspace }}
+
+      - name: Setup Git Config
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'github-actions@github.com'
+
+      - name: Commit and Push Changes
+        run: |
+          mkdir -p dist/2024-04-25
+          cp -r dist/* dist/2024-04-25/
+          git checkout -b gh-pages
+          git add dist/2024-04-25
+          git commit -m 'Deploy to gh-pages'
+          git push origin gh-pages
+        working-directory: ${{ github.workspace }}
