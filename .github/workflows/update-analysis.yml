@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
 
       - name: Install Dependencies
         run: npm install
@@ -31,7 +31,10 @@ jobs:
         working-directory: ./deriv-app
 
       - name: Build All Packages
+        env:
+          NODE_ENV: production
         run: npm run build:all
+        shell: bash
         working-directory: ./deriv-app
 
       - name: Analyze Build
@@ -51,7 +54,7 @@ jobs:
         run: |
           mkdir -p dist/2024-04-25
           cp -r dist/* dist/2024-04-25/
-          git checkout -b gh-pages
+          git checkout gh-pages
           git add dist/2024-04-25
           git commit -m 'Deploy to gh-pages'
           git push origin gh-pages
