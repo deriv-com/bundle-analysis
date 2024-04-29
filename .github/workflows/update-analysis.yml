@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.6.0
+        uses: JamesIves/github-pages-deploy-action@ec9c88baef04b842ca6f0a132fd61c762aa6c1b0
         with:
           branch: gh-pages
           folder: dist
