@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Build the bundle
+        run: npm run build
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@ec9c88baef04b842ca6f0a132fd61c762aa6c1b0
         with:
