@@ -1,0 +1,10 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.stats-table th:first-child {
+  width: 100%;
+}
+
+.stats-table td {
+  width: 100%;
+  white-space: nowrap;
+}
